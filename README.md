@@ -331,3 +331,22 @@ Added the target directory back to the git repo and still get failure in the her
 2020-04-04T18:52:18.918021+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=mighty-meadow-78433.herokuapp.com request_id=3963cd05-9a18-42f2-b5de-20d70bca394d fwd="70.94.9.139" dyno= connect= service= status=503 bytes= protocol=https
 
 ```
+
+# Fixed
+The errors are complaining about path but before that the build still complains about a string in the main. 
+There are multiple discussions about heroku wanting to determine it's own port so I resorted to Procfile and main as 
+used in the simple web app for heroku deployment project from [Purelyfunctional](https://purelyfunctional.tv/courses/web-dev-in-clojure/).
+
+In Procfile:
+``` 
+web: java $JVM_OPTS -cp target/baserf.jar clojure.main -m baserf.server $PORT
+```
+
+In src/clj/baserf/baserf.server
+``` 
+(defn -main [port]
+  (run-jetty handler {:port (Integer. port)}))
+```
+
+Should now go back to the git configuration and remove all the storage of target and node_modules since
+those probably didn't matter.

@@ -309,6 +309,25 @@ In the heroku log
 2020-04-04T18:22:42.718140+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=mighty-meadow-78433.herokuapp.com request_id=396f97ac-8241-4d5e-80db-7cf2d940e8fd fwd="70.94.9.139" dyno= connect= service= status=503 bytes= protocol=https
 2020-04-04T18:23:45.293241+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=mighty-meadow-78433.herokuapp.com request_id=78db1088-8f40-45a4-b0c3-c3cc52b34b74 fwd="70.94.9.139" dyno= connect= service= status=503 bytes= protocol=https
 2020-04-04T18:23:45.859752+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=mighty-meadow-78433.herokuapp.com request_id=49685557-37a8-482e-9ed1-86f0461c2c21 fwd="70.94.9.139" dyno= connect= service= status=503 bytes= protocol=https
+```
 
+Added the target directory back to the git repo and still get failure in the heroku log.
+``` 
+2020-04-04T18:49:54.000000+00:00 app[api]: Build started by user kmobgm@gmail.com
+2020-04-04T18:52:01.907852+00:00 heroku[web.1]: State changed from crashed to starting
+2020-04-04T18:52:01.490185+00:00 app[api]: Release v4 created by user kmobgm@gmail.com
+2020-04-04T18:52:01.490185+00:00 app[api]: Deploy 85a69209 by user kmobgm@gmail.com
+2020-04-04T18:52:07.000000+00:00 app[api]: Build succeeded
+2020-04-04T18:52:09.604459+00:00 app[web.1]: Setting JAVA_TOOL_OPTIONS defaults based on dyno size. Custom settings will override them.
+2020-04-04T18:52:09.609633+00:00 app[web.1]: Picked up JAVA_TOOL_OPTIONS: -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8
+2020-04-04T18:52:14.216141+00:00 app[web.1]: 2020-04-04 18:52:14.211:INFO::main: Logging initialized @4602ms to org.eclipse.jetty.util.log.StdErrLog
+2020-04-04T18:52:14.551011+00:00 app[web.1]: Execution error (ClassCastException) at baserf.server/-main (server.clj:8).
+2020-04-04T18:52:14.551102+00:00 app[web.1]: java.lang.Long cannot be cast to java.lang.String
+2020-04-04T18:52:14.551103+00:00 app[web.1]: 
+2020-04-04T18:52:14.551104+00:00 app[web.1]: Full report at:
+2020-04-04T18:52:14.551104+00:00 app[web.1]: /tmp/clojure-6490846177929135515.edn
+2020-04-04T18:52:14.673168+00:00 heroku[web.1]: State changed from starting to crashed
+2020-04-04T18:52:18.435716+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=mighty-meadow-78433.herokuapp.com request_id=25d76446-7a0f-4033-8607-32b3f6f39817 fwd="70.94.9.139" dyno= connect= service= status=503 bytes= protocol=https
+2020-04-04T18:52:18.918021+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=mighty-meadow-78433.herokuapp.com request_id=3963cd05-9a18-42f2-b5de-20d70bca394d fwd="70.94.9.139" dyno= connect= service= status=503 bytes= protocol=https
 
 ```

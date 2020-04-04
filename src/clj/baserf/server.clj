@@ -8,5 +8,5 @@
  ;;  (let [port (Integer/parseInt (or (env :port) "3000"))]
  ;;    (run-jetty handler {:port port :join? false})))
 
-(defn -main [& _args]
+(defn -main [port]
   (run-jetty handler {:port (Integer. port)}))

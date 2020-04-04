@@ -350,3 +350,6 @@ In src/clj/baserf/baserf.server
 
 Should now go back to the git configuration and remove all the storage of target and node_modules since
 those probably didn't matter.
+
+* remove /target from git repo - DONE!
+* remove /node_modules from git repo - 

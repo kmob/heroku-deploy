@@ -22,7 +22,7 @@
 
 (defn about-panel []
   [:div
-   [:h1 "This is the About Page."]
+   [:h1 "This is the About Page with updates."]
 
    [:div
     [:a {:href "#/"}

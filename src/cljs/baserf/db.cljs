@@ -1,4 +1,4 @@
 (ns baserf.db)
 
 (def default-db
-  {:name "re-frame"})
+  {:name "baserf"})

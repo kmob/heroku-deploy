@@ -242,3 +242,73 @@ If `port` is not set, the server will run on port 3000 by default.
     ```sh
     git push heroku master
     ```
+# The deploy fails if the .gitignore excludes the node_modules directory 
+``` 
+remote:        Compiling baserf.server
+remote:        [:app] Compiling ...
+remote:        The required namespace "react" is not available, it was required by "reagent/core.cljs".
+remote:        The namespace was provided via :foreign-libs which is not supported.
+remote:        Please refer to https://shadow-cljs.github.io/docs/UsersGuide.html#cljsjs for more information.
+remote:        You may just need to run:
+remote:          npm install react
+remote:        Error encountered performing task 'do' with profile(s): 'prod'
+remote:        Suppressed exit
+remote:  !     Failed to build.
+remote:  !     Push rejected, failed to compile Clojure (Leiningen 2) app.
+```
+
+# With node_modules included in the git repo, "[:app] Compiling" succeeds 
+``` 
+remote:        [:app] Compiling ...
+remote:        [:app] Build completed. (119 files, 42 compiled, 0 warnings, 42.56s)
+remote:        Created /tmp/build_9f325287c3ca4cfce2aaf9d2066cd156/target/baserf-0.1.0-SNAPSHOT.jar
+remote:        Created /tmp/build_9f325287c3ca4cfce2aaf9d2066cd156/target/baserf.jar
+remote: -----> Discovering process types
+remote:        Procfile declares types -> web
+remote: 
+remote: -----> Compressing...
+remote:        Done: 115.2M
+remote: -----> Launching...
+remote:        Released v3
+remote:        https://mighty-meadow-78433.herokuapp.com/ deployed to Heroku
+```
+# But the app crashes.
+at the browser:
+``` 
+Application Error
+An error occurred in the application and your page could not be served. If you are the application owner, check your logs for details. You can do this from the Heroku CLI with the command
+heroku logs --tail
+```
+In the heroku log
+```
+2020-04-04T18:19:58.000000+00:00 app[api]: Build started by user kmobgm@gmail.com
+2020-04-04T18:22:12.331444+00:00 app[api]: Deploy 4f070772 by user kmobgm@gmail.com
+2020-04-04T18:22:12.354868+00:00 app[api]: Scaled to web@1:Free by user kmobgm@gmail.com
+2020-04-04T18:22:12.331444+00:00 app[api]: Release v3 created by user kmobgm@gmail.com
+2020-04-04T18:22:19.000000+00:00 app[api]: Build succeeded
+2020-04-04T18:22:20.677654+00:00 app[web.1]: Setting JAVA_TOOL_OPTIONS defaults based on dyno size. Custom settings will override them.
+2020-04-04T18:22:20.684843+00:00 app[web.1]: Picked up JAVA_TOOL_OPTIONS: -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8
+2020-04-04T18:22:28.721297+00:00 app[web.1]: 2020-04-04 18:22:28.717:INFO::main: Logging initialized @8032ms to org.eclipse.jetty.util.log.StdErrLog
+2020-04-04T18:22:29.187415+00:00 app[web.1]: Execution error (ClassCastException) at baserf.server/-main (server.clj:8).
+2020-04-04T18:22:29.187426+00:00 app[web.1]: java.lang.Long cannot be cast to java.lang.String
+2020-04-04T18:22:29.187427+00:00 app[web.1]: 
+2020-04-04T18:22:29.187427+00:00 app[web.1]: Full report at:
+2020-04-04T18:22:29.187428+00:00 app[web.1]: /tmp/clojure-5597310829239524502.edn
+2020-04-04T18:22:29.299360+00:00 heroku[web.1]: State changed from starting to crashed
+2020-04-04T18:22:29.303175+00:00 heroku[web.1]: State changed from crashed to starting
+2020-04-04T18:22:36.252942+00:00 app[web.1]: Setting JAVA_TOOL_OPTIONS defaults based on dyno size. Custom settings will override them.
+2020-04-04T18:22:36.264398+00:00 app[web.1]: Picked up JAVA_TOOL_OPTIONS: -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8
+2020-04-04T18:22:40.876089+00:00 app[web.1]: 2020-04-04 18:22:40.872:INFO::main: Logging initialized @4608ms to org.eclipse.jetty.util.log.StdErrLog
+2020-04-04T18:22:41.227753+00:00 app[web.1]: Execution error (ClassCastException) at baserf.server/-main (server.clj:8).
+2020-04-04T18:22:41.227763+00:00 app[web.1]: java.lang.Long cannot be cast to java.lang.String
+2020-04-04T18:22:41.227764+00:00 app[web.1]: 
+2020-04-04T18:22:41.227764+00:00 app[web.1]: Full report at:
+2020-04-04T18:22:41.227765+00:00 app[web.1]: /tmp/clojure-6285618264460749594.edn
+2020-04-04T18:22:41.329653+00:00 heroku[web.1]: State changed from starting to crashed
+2020-04-04T18:22:41.996356+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=mighty-meadow-78433.herokuapp.com request_id=4c138dc0-f9fa-4956-b31c-4c55481af84d fwd="70.94.9.139" dyno= connect= service= status=503 bytes= protocol=https
+2020-04-04T18:22:42.718140+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=mighty-meadow-78433.herokuapp.com request_id=396f97ac-8241-4d5e-80db-7cf2d940e8fd fwd="70.94.9.139" dyno= connect= service= status=503 bytes= protocol=https
+2020-04-04T18:23:45.293241+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=mighty-meadow-78433.herokuapp.com request_id=78db1088-8f40-45a4-b0c3-c3cc52b34b74 fwd="70.94.9.139" dyno= connect= service= status=503 bytes= protocol=https
+2020-04-04T18:23:45.859752+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=mighty-meadow-78433.herokuapp.com request_id=49685557-37a8-482e-9ed1-86f0461c2c21 fwd="70.94.9.139" dyno= connect= service= status=503 bytes= protocol=https
+
+
+```

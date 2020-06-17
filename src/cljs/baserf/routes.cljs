@@ -3,18 +3,18 @@
   (:import [goog History]
            [goog.history EventType])
   (:require
-   [secretary.core :as secretary]
-   [goog.events :as gevents]
-   [re-frame.core :as re-frame]
-   [baserf.events :as events]
-   ))
+    [secretary.core :as secretary]
+    [goog.events :as gevents]
+    [re-frame.core :as re-frame]
+    [baserf.events :as events]
+    ))
 
 (defn hook-browser-navigation! []
   (doto (History.)
     (gevents/listen
-     EventType/NAVIGATE
-     (fn [event]
-       (secretary/dispatch! (.-token event))))
+      EventType/NAVIGATE
+      (fn [event]
+        (secretary/dispatch! (.-token event))))
     (.setEnabled true)))
 
 (defn app-routes []
@@ -22,11 +22,13 @@
   ;; --------------------
   ;; define routes here
   (defroute "/" []
-    (re-frame/dispatch [::events/set-active-panel :home-panel])
-    )
-
+            (re-frame/dispatch [::events/set-active-panel :home-panel])
+            )
+  (defroute "/test" []
+            (re-frame/dispatch [::events/set-active-panel :test-panel])
+            )
   (defroute "/about" []
-    (re-frame/dispatch [::events/set-active-panel :about-panel]))
+            (re-frame/dispatch [::events/set-active-panel :about-panel]))
 
 
   ;; --------------------

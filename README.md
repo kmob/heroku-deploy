@@ -242,7 +242,20 @@ If `port` is not set, the server will run on port 3000 by default.
     ```sh
     git push heroku master
     ```
-# The deploy fails if the .gitignore excludes the node_modules directory 
+   
+### Set heroku [buildpacks](https://devcenter.heroku.com/articles/using-node-js-with-clojure-and-clojurescript-applications)
+Add buildbacks at the heroku dashboard or at the command line.
+Running at the command line didn't seem to work before heroku push
+```
+$ heroku buildpacks:clear
+$ heroku buildpacks:add heroku/nodejs
+$ heroku buildpacks:add heroku/clojure
+```   
+
+### If you don't set buildpacks the deploy fails
+
+THIS REALLY ISN'T THE REASON!!!! THE REASON WAS BUILDPACKS SETTINGS!!!!
+The deploy fails if the .gitignore excludes the node_modules directory 
 ``` 
 remote:        Compiling baserf.server
 remote:        [:app] Compiling ...
@@ -353,3 +366,25 @@ those probably didn't matter.
 
 * remove /target from git repo - DONE!
 * remove /node_modules from git repo - 
+
+# Final Summary on Heroku Deploy!
+
+1. [Create a Heroku app](https://devcenter.heroku.com/articles/creating-apps):
+    ```sh
+    heroku create
+    ```
+
+2. Set heroku [buildpacks](https://devcenter.heroku.com/articles/using-node-js-with-clojure-and-clojurescript-applications)
+Add buildbacks at the heroku dashboard or at the command line.
+
+```
+$ heroku buildpacks:clear
+$ heroku buildpacks:add heroku/nodejs
+$ heroku buildpacks:add heroku/clojure
+```
+
+3. [Deploy the app code](https://devcenter.heroku.com/articles/git#deploying-code):
+
+    ```sh
+    git push heroku master
+    ```

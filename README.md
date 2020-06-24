@@ -242,17 +242,9 @@ If `port` is not set, the server will run on port 3000 by default.
     ```sh
     git push heroku master
     ```
-   
-### Set heroku [buildpacks](https://devcenter.heroku.com/articles/using-node-js-with-clojure-and-clojurescript-applications)
-Add buildbacks at the heroku dashboard or at the command line.
-Running at the command line didn't seem to work before heroku push
-```
-$ heroku buildpacks:clear
-$ heroku buildpacks:add heroku/nodejs
-$ heroku buildpacks:add heroku/clojure
-```   
+  
 
-### If you don't set buildpacks the deploy fails
+### If you don't include node_modules directory the deploy fails
 
 THIS REALLY ISN'T THE REASON!!!! THE REASON WAS BUILDPACKS SETTINGS!!!!
 The deploy fails if the .gitignore excludes the node_modules directory 
@@ -345,7 +337,7 @@ Added the target directory back to the git repo and still get failure in the her
 
 ```
 
-# Fixed
+# Fixed Build Issues
 The errors are complaining about path but before that the build still complains about a string in the main. 
 There are multiple discussions about heroku wanting to determine it's own port so I resorted to Procfile and main as 
 used in the simple web app for heroku deployment project from [Purelyfunctional](https://purelyfunctional.tv/courses/web-dev-in-clojure/).
@@ -368,6 +360,8 @@ those probably didn't matter.
 * remove /node_modules from git repo - 
 
 # Final Summary on Heroku Deploy!
+
+0. Fix the -main and Procfile (see above) before attempting deploy to Heroku.
 
 1. [Create a Heroku app](https://devcenter.heroku.com/articles/creating-apps):
     ```sh

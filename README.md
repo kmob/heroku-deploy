@@ -369,7 +369,8 @@ those probably didn't matter.
     ```
 
 2. Set heroku [buildpacks](https://devcenter.heroku.com/articles/using-node-js-with-clojure-and-clojurescript-applications)
-Add buildbacks at the heroku dashboard or at the command line.
+Add buildbacks at the heroku dashboard or at the command line. Without buildpacks set 
+to include nodejs, heroku's build tools can't find node.
 
 ```
 $ heroku buildpacks:clear

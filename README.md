@@ -2,6 +2,10 @@
 
 A [re-frame](https://github.com/day8/re-frame) application designed to test docker deploy to heroku.
 
+## ISSUES
+Outdated version of shadow-cljs was generating security warnings at GitHub.
+After updates, jar builds fail. Not clear that this still works to test docker.
+
 ## Getting Started
 
 ``` 

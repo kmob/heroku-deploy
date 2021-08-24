@@ -1,16 +1,16 @@
 (defproject baserf "0.1.0-SNAPSHOT"
-  :dependencies [[org.clojure/clojure "1.10.1"]
-                 [org.clojure/clojurescript "1.10.597"
+  :dependencies [[org.clojure/clojure "1.10.3"]
+                 [org.clojure/clojurescript "1.10.879"
                   :exclusions [com.google.javascript/closure-compiler-unshaded
                                org.clojure/google-closure-library
                                org.clojure/google-closure-library-third-party]]
-                 [thheller/shadow-cljs "2.8.83"]
-                 [reagent "0.9.1"]
-                 [re-frame "0.11.0"]
+                 [thheller/shadow-cljs "2.15.5"]
+                 [reagent "1.1.0"]
+                 [re-frame "1.2.0"]
                  [secretary "1.2.3"]
-                 [compojure "1.6.1"]
-                 [yogthos/config "1.1.7"]
-                 [ring "1.7.1"]]
+                 [compojure "1.6.2"]
+                 [yogthos/config "1.1.8"]
+                 [ring "1.9.4"]]
 
   :plugins [
             [lein-shell "0.5.0"]]
@@ -39,7 +39,7 @@
 
   :profiles
   {:dev
-   {:dependencies [[binaryage/devtools "1.0.0"]]
+   {:dependencies [[binaryage/devtools "1.0.3"]]
     :source-paths ["dev"]}
 
    :prod { }

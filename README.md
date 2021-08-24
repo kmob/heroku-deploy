@@ -8,6 +8,20 @@ A [re-frame](https://github.com/day8/re-frame) application designed to test dock
 $ lein new re-frame baserf +handler +routes
 ```
 
+Start the app. TODO - Doesn't work due to the edn configuration.
+``` 
+$ lein deps && npm install
+$ lein watch
+shadow-cljs - HTTP server available at http://localhost:8280
+shadow-cljs - server version: 2.11.7 running at http://localhost:9630
+shadow-cljs - nREPL server started on port 8777
+shadow-cljs - watching build :app
+[:app] Configuring build.
+[:app] Compiling ...
+[:app] Build completed. (261 files, 0 compiled, 0 warnings, 19.65s)
+```
+
+
 ### Running the Server
 
 [Run the jar](https://github.com/ring-clojure/ring/wiki/Setup-for-production#run-the-server),
